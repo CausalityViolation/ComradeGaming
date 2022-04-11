@@ -1,0 +1,62 @@
+package entities;
+
+import enums.Company;
+import enums.Tag;
+
+import javax.persistence.*;
+
+import enums.Platform;
+
+import java.util.*;
+
+@Entity
+public class DigitalGame extends Product {
+
+    private Platform platform;
+    private Company developer;
+    private Company publisher;
+
+    public DigitalGame() {
+    }
+
+    public DigitalGame(Platform platform, Company developer, Company publisher
+            , String name, int price, String productDescription, String imageUrl) {
+        super(name, price, productDescription, imageUrl);
+        this.platform = platform;
+        this.developer = developer;
+        this.publisher = publisher;
+    }
+
+    public Platform getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
+    }
+
+    public Company getDeveloper() {
+        return developer;
+    }
+
+    public void setDeveloper(Company developer) {
+        this.developer = developer;
+    }
+
+    public Company getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Company publisher) {
+        this.publisher = publisher;
+    }
+
+    public void addTagSingle(Tag tag) {
+        tags.add(tag);
+    }
+
+    public void addTagList(List<Tag> tags) {
+        this.tags.addAll(tags);
+    }
+}
+
