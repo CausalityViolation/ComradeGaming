@@ -14,8 +14,8 @@ public class BoardGame extends Product {
     public BoardGame() {
     }
 
-    public BoardGame(String name, int price, String productDescription, Company publisher) {
-        super(name, price, productDescription);
+    public BoardGame(String name, int price, String productDescription, Company publisher, String imageUrl) {
+        super(name, price, productDescription, imageUrl);
         this.publisher = publisher;
     }
 
