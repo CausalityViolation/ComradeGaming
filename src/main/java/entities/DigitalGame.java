@@ -1,5 +1,6 @@
 package entities;
 
+import enums.Category;
 import enums.Company;
 import enums.Tag;
 
@@ -10,6 +11,7 @@ import enums.Platform;
 import java.util.*;
 
 @Entity
+@Table
 public class DigitalGame extends Product {
 
     private Platform platform;
@@ -20,8 +22,8 @@ public class DigitalGame extends Product {
     }
 
     public DigitalGame(Platform platform, Company developer, Company publisher
-            , String name, int price, String productDescription, String imageUrl) {
-        super(name, price, productDescription, imageUrl);
+            , String name, int price, String productDescription, String imageUrl, Category category) {
+        super(name, price, productDescription, imageUrl, category);
         this.platform = platform;
         this.developer = developer;
         this.publisher = publisher;

@@ -1,9 +1,9 @@
 package testData;
 
+import entities.Clothing;
 import entities.DigitalGame;
-import enums.Company;
-import enums.Platform;
-import enums.Tag;
+import entities.Movie;
+import enums.*;
 
 import java.util.ArrayList;
 import java.util.List;

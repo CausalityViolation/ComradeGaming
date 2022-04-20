@@ -1,5 +1,6 @@
 package entities;
 
+import enums.Category;
 import enums.Company;
 import enums.Tag;
 
@@ -7,6 +8,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table
 public class BoardGame extends Product {
     private Company publisher;
 
@@ -14,8 +16,8 @@ public class BoardGame extends Product {
     public BoardGame() {
     }
 
-    public BoardGame(String name, int price, String productDescription, Company publisher, String imageUrl) {
-        super(name, price, productDescription, imageUrl);
+    public BoardGame(String name, int price, String productDescription, Company publisher, String imageUrl, Category category) {
+        super(name, price, productDescription, imageUrl, category);
         this.publisher = publisher;
     }
 

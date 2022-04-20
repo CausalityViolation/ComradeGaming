@@ -1,14 +1,17 @@
 package entities;
 
+import enums.Category;
 import enums.Company;
 import enums.Garment;
 import enums.Tag;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table
 public class Clothing extends Product {
 
     private Company brand;
@@ -17,8 +20,8 @@ public class Clothing extends Product {
     public Clothing() {
     }
 
-    public Clothing(String name, int price, String productDescription, Company brand, Garment garment, String imageUrl) {
-        super(name, price, productDescription, imageUrl);
+    public Clothing(String name, int price, String productDescription, Company brand, Garment garment, String imageUrl, Category category) {
+        super(name, price, productDescription, imageUrl, category);
         this.brand = brand;
         this.garment = garment;
     }

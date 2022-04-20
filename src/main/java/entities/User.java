@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table
 public class User {
     @Id
     private String username;
@@ -17,14 +18,17 @@ public class User {
 
     //Rekomenderade produkter. Vilka produkter har flest matchange tags med användaren???
 
-    public User() {}
+    public User() {
+    }
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    public void buy(Product product) {  owned.add(product); }
+    public void buy(Product product) {
+        owned.add(product);
+    }
 
     public String getUsername() {
         return username;
@@ -46,7 +50,11 @@ public class User {
         return owned;
     }
 
-    public void addItemForSale(Product item){ forSale.add(item); }
+    public void addItemForSale(Product item) {
+        forSale.add(item);
+    }
 
-    public List<Product> getForSale(){return forSale;}
+    public List<Product> getForSale() {
+        return forSale;
+    }
 }

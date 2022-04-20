@@ -1,5 +1,6 @@
 package entities;
 
+import enums.Category;
 import enums.Tag;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ public abstract class Product implements ProductInterface {
     private int price;
     private String productDescription;
     private boolean used = false;
+    private Category category;
 
     @ManyToOne
     private User seller;
@@ -32,11 +34,12 @@ public abstract class Product implements ProductInterface {
     String imageURL;
 
 
-    public Product(String name, int price, String productDescription, String imageURL) {
+    public Product(String name, int price, String productDescription, String imageURL, Category category) {
         this.name = name;
         this.price = price;
         this.productDescription = productDescription;
         this.imageURL = imageURL;
+        this.category = category;
     }
 
     public Product() {

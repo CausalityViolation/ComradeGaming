@@ -1,12 +1,15 @@
 package entities;
 
+import enums.Category;
 import enums.Company;
 import enums.Tag;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.ArrayList;
 
 @Entity
+@Table
 public class Movie extends Product {
 
     private Company publisher;
@@ -14,8 +17,8 @@ public class Movie extends Product {
     public Movie() {
     }
 
-    public Movie(String name, int price, String productDescription, Company publisher, String imageUrl) {
-        super(name, price, productDescription, imageUrl);
+    public Movie(String name, int price, String productDescription, Company publisher, String imageUrl, Category category) {
+        super(name, price, productDescription, imageUrl, category);
         this.publisher = publisher;
     }
 
