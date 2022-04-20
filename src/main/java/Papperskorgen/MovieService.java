@@ -1,8 +1,7 @@
-package service;
+package Papperskorgen;
 
 import entities.Movie;
 import org.springframework.stereotype.Service;
-import repo.MovieRepo;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Optional;

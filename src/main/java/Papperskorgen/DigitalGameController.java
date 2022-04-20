@@ -1,10 +1,10 @@
-package controller;
+package Papperskorgen;
 
 import entities.DigitalGame;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.DigitalGameService;
+import Papperskorgen.DigitalGameService;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Optional;

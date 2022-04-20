@@ -1,7 +1,7 @@
 package enums;
 
 public enum Company {
-    MICROSOFT,
+    Microsoft,
     FROM_SOFTWARE,
     BLIZZARD,
     NINTENDO,

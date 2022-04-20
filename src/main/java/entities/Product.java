@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public abstract class Product {
+@Table
+public abstract class Product implements ProductInterface {
+    //Om allt kraschar sen kanske det är pga att denna klass är abstrakt. Låter det vara så länge
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,6 +24,7 @@ public abstract class Product {
     @ElementCollection
     ArrayList<Tag> tags = new ArrayList<>();
 
+    //FÖR ATT REKOMENDERA KÖP. MATCHA KÖPTA SPEL OSV.
     @ManyToMany(mappedBy = "owned")
     List<User> buyers;
 
@@ -39,8 +42,18 @@ public abstract class Product {
     public Product() {
     }
 
+    @Override
+    public String getInformation() {
+        return "こんな風にアップリ使用出来ません。他の商品選択して下さい。CHOSEN ITEM IS CLASS PRODUCT. YOU ARE USING THE APPLICATION IN AN INCORRECT WAY YOU FOOL.";
+    }
+
     public int getId() {
         return id;
+    }
+
+    //För testning. Ska tas bort när applikationen är klar.
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -77,5 +90,13 @@ public abstract class Product {
 
     public void addTagList(List<Tag> tags) {
         this.tags.addAll(tags);
+    }
+
+    public User getSeller() {
+        return seller;
+    }
+
+    public void setSeller(User seller) {
+        this.seller = seller;
     }
 }

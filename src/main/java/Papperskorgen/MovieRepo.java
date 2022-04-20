@@ -1,9 +1,9 @@
-package repo;
+package Papperskorgen;
 
-import entities.Clothing;
+import entities.Movie;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ClothingRepo extends CrudRepository<Clothing, Integer> {
+public interface MovieRepo extends CrudRepository<Movie, Integer> {
 }

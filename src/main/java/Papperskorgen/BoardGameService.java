@@ -1,7 +1,7 @@
-package service;
+package Papperskorgen;
 
 import org.springframework.stereotype.Service;
 
 @Service
-public class ClothingService {
+public class BoardGameService {
 }

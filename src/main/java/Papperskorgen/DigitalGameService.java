@@ -1,9 +1,7 @@
-package service;
+package Papperskorgen;
 
 import entities.DigitalGame;
-import entities.User;
 import org.springframework.stereotype.Service;
-import repo.DigitalGameRepo;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Optional;

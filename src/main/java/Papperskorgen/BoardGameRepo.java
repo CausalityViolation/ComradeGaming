@@ -1,4 +1,4 @@
-package repo;
+package Papperskorgen;
 
 import entities.BoardGame;
 import org.springframework.data.repository.CrudRepository;
