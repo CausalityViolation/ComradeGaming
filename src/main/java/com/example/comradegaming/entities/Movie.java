@@ -13,6 +13,7 @@ public class Movie extends Product {
 
     private Company publisher;
 
+
     public Movie() {
     }
 

@@ -1,6 +1,6 @@
 package com.example.comradegaming.controller;
 
-import com.example.comradegaming.entities.Product;
+import com.example.comradegaming.entities.*;
 import com.example.comradegaming.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

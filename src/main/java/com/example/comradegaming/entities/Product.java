@@ -2,6 +2,7 @@ package com.example.comradegaming.entities;
 
 import com.example.comradegaming.enums.Category;
 import com.example.comradegaming.enums.Tag;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public abstract class Product implements ProductInterface {
     private boolean used = false;
     private Category category;
 
+    @JsonBackReference
     @ManyToOne
     private User seller;
     /*

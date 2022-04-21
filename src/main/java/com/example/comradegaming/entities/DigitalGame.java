@@ -18,6 +18,16 @@ public class DigitalGame extends Product {
     private Company developer;
     private Company publisher;
 
+    public String getTest() {
+        return test;
+    }
+
+    public void setTest(String test) {
+        this.test = test;
+    }
+
+    private String test;
+
     public DigitalGame() {
     }
 
@@ -42,9 +52,9 @@ public class DigitalGame extends Product {
     public String getInformation() {
         String info = getName() + " is game developed by " + developer + " and published by " + publisher
                 + ". It is playable on " + platform + ". It costs " + getPrice() + " rubels.";
-        if (!getSeller().equals(null)) {
-            info = info + " It is sold by " + getSeller().getUsername() + ".";
-        }
+//        if (!getSeller().equals(null)) {
+//            info = info + " It is sold by " + getSeller().getUsername() + ".";
+//        }
         return info;
     }
 
