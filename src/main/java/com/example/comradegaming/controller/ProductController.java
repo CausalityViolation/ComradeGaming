@@ -10,7 +10,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("product")
+@RequestMapping("products")
 public class ProductController {
 
 
@@ -41,7 +41,7 @@ public class ProductController {
         return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 
-    /*
+
     @GetMapping("{id}")
     public ResponseEntity<Optional<Product>> find(@PathVariable Integer id) {
         Optional<Product> found = service.find(id);
@@ -49,12 +49,35 @@ public class ProductController {
         return new ResponseEntity<>(found, HttpStatus.OK);
     }
 
-    @PostMapping
+
+    @PostMapping("/add/digitalgame")
     public ResponseEntity<DigitalGame> add(@RequestBody DigitalGame game) {
+
         service.add(game);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+
+    @PostMapping("/add/clothing")
+    public ResponseEntity<Clothing> add(@RequestBody Clothing cloth) {
+        service.add(cloth);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping("/add/boardgame")
+    public ResponseEntity<BoardGame> add(@RequestBody BoardGame board) {
+        service.add(board);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping("/add/movie")
+    public ResponseEntity<Movie> add(@RequestBody Movie movieFilm) {
+        service.add(movieFilm);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+
+/*
     @DeleteMapping("{id}")
     public ResponseEntity<Product> remove(@PathVariable Integer id) {
         checkIfNull(service.find(id));

@@ -10,6 +10,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("users")
 public class UserController {
 
     private final UserService service;
@@ -18,13 +19,13 @@ public class UserController {
         this.service = userService;
     }
 
-    @GetMapping("/users")
+    @GetMapping()
     public ResponseEntity<Iterable<User>> findAll() {
         Iterable<User> found = service.findAll();
         return new ResponseEntity<>(found, HttpStatus.OK);
     }
 
-    @GetMapping("/users/{name}")
+    @GetMapping("{name}")
     public ResponseEntity<Optional<User>> findByName(@PathVariable String name) {
         Optional<User> found = service.find(name);
         if (found.isEmpty()) {
@@ -34,13 +35,13 @@ public class UserController {
         }
     }
 
-    @PostMapping("/users")
+    @PostMapping()
     public ResponseEntity<User> add(@RequestBody User user) {
         User added = service.add(user);
         return new ResponseEntity<>(added, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/users/{name}")
+    @DeleteMapping("{name}")
     public String remove(@PathVariable String name) {
 
         Optional<User> found = service.find(name);
