@@ -7,7 +7,8 @@ import javax.persistence.*;
 public class Admin {
 
     @Id
-    //MEN DEN BORDE VARA FINAL VAFAN
+    @GeneratedValue
+    private long id;
     private String adminName;
     private String adminPassword;
 

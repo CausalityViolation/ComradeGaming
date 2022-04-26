@@ -4,8 +4,11 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table
 public class User {
     @Id
+    @GeneratedValue
+    private long id;
     private String username;
     private String password;
 
