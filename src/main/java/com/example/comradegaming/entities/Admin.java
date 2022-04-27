@@ -1,7 +1,10 @@
 package com.example.comradegaming.entities;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.persistence.*;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 public class Admin {
 

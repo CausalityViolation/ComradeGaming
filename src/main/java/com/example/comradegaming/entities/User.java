@@ -3,7 +3,7 @@ package com.example.comradegaming.entities;
 import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
@@ -16,8 +16,8 @@ public class User {
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Product> owned;
 
-    @OneToMany(mappedBy = "seller", cascade = CascadeType.PERSIST)
-    private List<Product> forSale;
+    @OneToMany(mappedBy = "seller")
+    private Set<Product> forSale;
 
     //Rekomenderade produkter. Vilka produkter har flest matchange tags med användaren???
 
@@ -49,7 +49,7 @@ public class User {
         this.password = password;
     }
 
-    public List<Product> getOwned() {
+    public Set<Product> getOwned() {
         return owned;
     }
 
@@ -57,7 +57,7 @@ public class User {
         forSale.add(item);
     }
 
-    public List<Product> getForSale() {
+    public Set<Product> getForSale() {
         return forSale;
     }
 

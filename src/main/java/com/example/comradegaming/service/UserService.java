@@ -14,10 +14,12 @@ public class UserService {
 
     private final UserRepo repository;
     private final ProductRepo productRepository;
+    private final ProductService productService;
 
-    public UserService(UserRepo userRepo, ProductRepo productRepo) {
+    public UserService(UserRepo userRepo, ProductRepo productRepo, ProductService productService) {
         this.repository = userRepo;
         this.productRepository = productRepo;
+        this.productService = productService;
     }
 
     public User add(User user) {
@@ -57,7 +59,7 @@ public class UserService {
         return repository.findAll();
     }
 
-    public void buyProduct(int productID, long userID) {
+    public void buyProduct(long productID, long userID) {
         Optional<Product> bought = productRepository.findById(productID);
         Optional<User> user = repository.findById(userID);
 
@@ -65,6 +67,19 @@ public class UserService {
         Product foundProduct = bought.get();
         User foundUser = user.get();
         foundUser.purchaseProduct(foundProduct);
+        productService.addUserToProduct(foundUser, foundProduct);
+        repository.save(foundUser);
+    }
+
+    public void addForSale(long productID, long userID){
+        Optional<Product> productOptional = productRepository.findById(productID);
+        Optional<User> user = repository.findById(userID);
+
+        //exceptionhandling behövs här
+        Product foundProduct = productOptional.get();
+        User foundUser = user.get();
+
+        foundUser.addItemForSale(foundProduct);
         repository.save(foundUser);
     }
 }

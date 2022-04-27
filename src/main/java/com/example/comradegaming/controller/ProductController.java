@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
+import java.util.Set;
 
 
 @RestController
@@ -24,7 +25,7 @@ public class ProductController {
 
 
     @GetMapping("/information/{id}")
-    public ResponseEntity<String> getInformation(@PathVariable Integer id) {
+    public ResponseEntity<String> getInformation(@PathVariable Long id) {
         Optional<Product> foundItem = service.find(id);
         checkIfNull(foundItem);
         //noinspection OptionalGetWithoutIsPresent
@@ -45,7 +46,7 @@ public class ProductController {
 
 
     @GetMapping("{id}")
-    public ResponseEntity<Optional<Product>> find(@PathVariable Integer id) {
+    public ResponseEntity<Optional<Product>> find(@PathVariable Long id) {
         Optional<Product> found = service.find(id);
         checkIfNull(found);
         return new ResponseEntity<>(found, HttpStatus.OK);
@@ -86,8 +87,19 @@ public class ProductController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Product> remove(@PathVariable Integer id) {
-        checkIfNull(service.find(id));
+    public ResponseEntity<Product> remove(@PathVariable Long id) {
+        Optional<Product> productOptional = service.find(id);
+        checkIfNull(productOptional);
+        //exceptionhandling
+        Product foundProduct = productOptional.get();
+        Set<User> buyers = foundProduct.getBuyers();
+        for (User buyer: buyers) {
+            for (Product owned: buyer.getOwned()) {
+                if(owned.getId()==foundProduct.getId()){
+                    buyer.removePurchasedProduct(owned);
+                }
+            }
+        }
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

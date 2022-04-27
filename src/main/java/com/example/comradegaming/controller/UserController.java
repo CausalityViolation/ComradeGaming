@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @PatchMapping("buy/{userID}/{productID}")
-    public ResponseEntity<User> purchase(@PathVariable Long userID, @PathVariable int productID) {
+    public ResponseEntity<User> purchase(@PathVariable Long userID, @PathVariable Long productID) {
         service.buyProduct(productID, userID);
         return new ResponseEntity<>(HttpStatus.OK);
     }

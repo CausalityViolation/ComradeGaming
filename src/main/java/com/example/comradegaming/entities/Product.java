@@ -16,7 +16,7 @@ public abstract class Product implements ProductInterface {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
     private String name;
     private int price;
     private String productDescription;
@@ -26,7 +26,7 @@ public abstract class Product implements ProductInterface {
     //lista ut hur allt ska göras sen
     String imageURL;
     @JsonBackReference
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private User seller;
     /*
     @ElementCollection
@@ -35,7 +35,7 @@ public abstract class Product implements ProductInterface {
      */
     //FÖR ATT REKOMENDERA KÖP. MATCHA KÖPTA SPEL OSV.
     @ManyToMany(mappedBy = "owned")
-    List<User> buyers;
+    Set<User> buyers;
 
 
     public Product(String name, int price, String productDescription, String imageURL, Category category) {
@@ -54,12 +54,12 @@ public abstract class Product implements ProductInterface {
         return "こんな風にアップリ使用出来ません。他の商品選択して下さい。CHOSEN ITEM IS CLASS PRODUCT. YOU ARE USING THE APPLICATION IN AN INCORRECT WAY YOU FOOL.";
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
     //För testning. Ska tas bort när applikationen är klar.
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -77,6 +77,10 @@ public abstract class Product implements ProductInterface {
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
+    }
+
+    public Set<User> getBuyers() {
+        return buyers;
     }
 
     public String getName() {
