@@ -35,6 +35,12 @@ public class UserController {
         }
     }
 
+    @PatchMapping("buy/{userID}/{productID}")
+    public ResponseEntity<User> purchase(@PathVariable Long userID, @PathVariable int productID) {
+        service.buyProduct(productID, userID);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PostMapping()
     public ResponseEntity<User> add(@RequestBody User user) {
         User added = service.add(user);

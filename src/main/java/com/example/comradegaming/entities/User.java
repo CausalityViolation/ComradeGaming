@@ -1,5 +1,7 @@
 package com.example.comradegaming.entities;
 
+import com.fasterxml.jackson.annotation.*;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -27,7 +29,7 @@ public class User {
         this.password = password;
     }
 
-    public void buy(Product product) {
+    public void purchaseProduct(Product product) {
         owned.add(product);
     }
 

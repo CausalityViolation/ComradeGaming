@@ -54,6 +54,7 @@ public class ProductController {
     @PostMapping("/add/digitalgame")
     public ResponseEntity<DigitalGame> add(@RequestBody DigitalGame game) {
         game.setCategory(Category.DigitalGame);
+
         service.add(game);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -62,6 +63,7 @@ public class ProductController {
     @PostMapping("/add/clothing")
     public ResponseEntity<Clothing> add(@RequestBody Clothing cloth) {
         cloth.setCategory(Category.Clothing);
+
         service.add(cloth);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -69,6 +71,7 @@ public class ProductController {
     @PostMapping("/add/boardgame")
     public ResponseEntity<BoardGame> add(@RequestBody BoardGame board) {
         board.setCategory(Category.Board);
+
         service.add(board);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -76,6 +79,7 @@ public class ProductController {
     @PostMapping("/add/movie")
     public ResponseEntity<Movie> add(@RequestBody Movie movieFilm) {
         movieFilm.setCategory(Category.Movie);
+
         service.add(movieFilm);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

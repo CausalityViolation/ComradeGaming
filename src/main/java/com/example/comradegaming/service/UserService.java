@@ -60,10 +60,9 @@ public class UserService {
     public void buy(int productID, long userID){
         Optional<Product> bought = productRepository.findById(productID);
         //exceptionhandling behövs här
-        Product pro = bought.get();
-        Optional<User> user = repository.findById(userID);
-        User use = user.get();
-        use.buy(pro);
-        repository.save(use);
+        Product foundProduct = bought.get();
+        User foundUser = user.get();
+        foundUser.purchaseProduct(foundProduct);
+        repository.save(foundUser);
     }
 }
