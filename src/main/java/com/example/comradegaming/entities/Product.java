@@ -3,11 +3,13 @@ package com.example.comradegaming.entities;
 import com.example.comradegaming.enums.Category;
 import com.example.comradegaming.enums.Tag;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 public abstract class Product implements ProductInterface {
     //Om allt kraschar sen kanske det är pga att denna klass är abstrakt. Låter det vara så länge

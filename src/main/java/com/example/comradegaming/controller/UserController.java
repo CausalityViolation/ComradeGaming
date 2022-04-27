@@ -1,5 +1,6 @@
 package com.example.comradegaming.controller;
 
+import com.example.comradegaming.entities.Product;
 import com.example.comradegaming.entities.User;
 import com.example.comradegaming.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class UserController {
     @GetMapping("{name}")
     public ResponseEntity<User> findByName(@PathVariable String name) {
         User found = service.find(name);
-        if (found==null) {
+        if (found == null) {
             throw new EntityNotFoundException("Could not find User with name " + name);
         } else {
             return new ResponseEntity<>(found, HttpStatus.OK);
@@ -43,6 +44,7 @@ public class UserController {
 
     @PostMapping()
     public ResponseEntity<User> add(@RequestBody User user) {
+
         User added = service.add(user);
         return new ResponseEntity<>(added, HttpStatus.CREATED);
     }
@@ -51,7 +53,7 @@ public class UserController {
     public String remove(@PathVariable String name) {
 
         User found = service.find(name);
-        if (found==null) {
+        if (found == null) {
             throw new EntityNotFoundException("Could not find User with name " + name);
         } else {
             service.delete(name);

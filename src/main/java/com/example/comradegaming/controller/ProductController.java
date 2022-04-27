@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
+
 @RestController
 @RequestMapping("products")
 public class ProductController {
@@ -83,6 +84,7 @@ public class ProductController {
         service.add(movieFilm);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
     @DeleteMapping("{id}")
     public ResponseEntity<Product> remove(@PathVariable Integer id) {
         checkIfNull(service.find(id));
@@ -90,12 +92,16 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+
+
+
+
+
+
+
+
+
 /*
-
-
-
-
-
 
     //NÅNSLAGSTEMPLATEIDE
     private void checkIfNull(Optional<Product> thing) {

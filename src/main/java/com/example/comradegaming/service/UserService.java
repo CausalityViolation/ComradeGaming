@@ -17,7 +17,7 @@ public class UserService {
 
     public UserService(UserRepo userRepo, ProductRepo productRepo) {
         this.repository = userRepo;
-        this.productRepository=productRepo;
+        this.productRepository = productRepo;
     }
 
     public User add(User user) {
@@ -26,15 +26,15 @@ public class UserService {
 
     public User find(String name) {
         var all = repository.findAll();
-        User found=null;
+        User found = null;
 
-        for (User user: all) {
-            if(user.getUsername().equalsIgnoreCase(name)){
-                found=user;
+        for (User user : all) {
+            if (user.getUsername().equalsIgnoreCase(name)) {
+                found = user;
                 break;
             }
         }
-        if (found!=null) {
+        if (found != null) {
             return found;
             //Ska man verkligen kasta denna exception på flera ställen?!
         } else {
@@ -46,7 +46,7 @@ public class UserService {
 
         var found = find(name);
 
-        if (found!=null) {
+        if (found != null) {
             repository.deleteById(found.getId());
         } else {
             throw new EntityNotFoundException("User with name " + name + "not found!");
@@ -57,8 +57,10 @@ public class UserService {
         return repository.findAll();
     }
 
-    public void buy(int productID, long userID){
+    public void buyProduct(int productID, long userID) {
         Optional<Product> bought = productRepository.findById(productID);
+        Optional<User> user = repository.findById(userID);
+
         //exceptionhandling behövs här
         Product foundProduct = bought.get();
         User foundUser = user.get();
