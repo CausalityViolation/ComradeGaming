@@ -13,8 +13,10 @@ public class User {
     private long id;
     private String username;
     private String password;
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    private List<Product> owned;
+
+    @JsonBackReference
+    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+    private Set<Product> owned;
 
     @OneToMany(mappedBy = "seller")
     private Set<Product> forSale;
@@ -31,6 +33,10 @@ public class User {
 
     public void purchaseProduct(Product product) {
         owned.add(product);
+    }
+
+    public void removePurchasedProduct(Product product) {
+        owned.remove(product);
     }
 
     public String getUsername() {

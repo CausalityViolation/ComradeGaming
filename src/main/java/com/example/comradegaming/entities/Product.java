@@ -1,13 +1,11 @@
 package com.example.comradegaming.entities;
 
 import com.example.comradegaming.enums.Category;
-import com.example.comradegaming.enums.Tag;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
@@ -20,11 +18,10 @@ public abstract class Product implements ProductInterface {
     private String name;
     private int price;
     private String productDescription;
-    //Kommer inte ihåg vad denna var till för?
-    private boolean used = false;
     private Category category;
     //lista ut hur allt ska göras sen
     String imageURL;
+
     @JsonBackReference
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private User seller;
@@ -52,6 +49,10 @@ public abstract class Product implements ProductInterface {
     @Override
     public String getInformation() {
         return "こんな風にアップリ使用出来ません。他の商品選択して下さい。CHOSEN ITEM IS CLASS PRODUCT. YOU ARE USING THE APPLICATION IN AN INCORRECT WAY YOU FOOL.";
+    }
+
+    public void addUserToBuyerList(User user) {
+        buyers.add(user);
     }
 
     public long getId() {

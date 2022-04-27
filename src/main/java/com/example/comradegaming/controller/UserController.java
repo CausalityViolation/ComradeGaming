@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
+import javax.ws.rs.Path;
 import java.util.Optional;
 
 @RestController
@@ -41,6 +42,15 @@ public class UserController {
         service.buyProduct(productID, userID);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PatchMapping("addtoforsale/{userID}/{productID}")
+    public ResponseEntity<User> sellProduct(@PathVariable Long userID, @PathVariable Long productID) {
+        service.addForSale(productID, userID);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    //Lägg till en till endpoint för att SÄLJA item (ta bort från forSale-listan
+
 
     @PostMapping()
     public ResponseEntity<User> add(@RequestBody User user) {

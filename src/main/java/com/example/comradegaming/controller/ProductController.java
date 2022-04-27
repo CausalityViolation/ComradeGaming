@@ -39,6 +39,7 @@ public class ProductController {
         }
     }
 
+    //Kanske fixa så BUYERS endast syns för admins
     @GetMapping
     public ResponseEntity<Iterable<Product>> findAll() {
         return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
