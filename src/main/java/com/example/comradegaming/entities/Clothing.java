@@ -16,16 +16,6 @@ public class Clothing extends Product {
     private Company brand;
     private Garment garment;
 
-    public String getBajs() {
-        return bajs;
-    }
-
-    public void setBajs(String bajs) {
-        this.bajs = bajs;
-    }
-
-    private String bajs;
-
     public Clothing() {
     }
 

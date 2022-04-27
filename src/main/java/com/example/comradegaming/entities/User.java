@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table
 public class User {
     @Id
     @GeneratedValue
@@ -58,5 +57,9 @@ public class User {
 
     public List<Product> getForSale() {
         return forSale;
+    }
+
+    public long getId() {
+        return id;
     }
 }

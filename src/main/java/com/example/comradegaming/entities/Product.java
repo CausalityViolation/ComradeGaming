@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table
 public abstract class Product implements ProductInterface {
     //Om allt kraschar sen kanske det är pga att denna klass är abstrakt. Låter det vara så länge
 
@@ -19,9 +18,11 @@ public abstract class Product implements ProductInterface {
     private String name;
     private int price;
     private String productDescription;
+    //Kommer inte ihåg vad denna var till för?
     private boolean used = false;
     private Category category;
-
+    //lista ut hur allt ska göras sen
+    String imageURL;
     @JsonBackReference
     @ManyToOne
     private User seller;
@@ -30,13 +31,9 @@ public abstract class Product implements ProductInterface {
     ArrayList<Tag> tags = new ArrayList<>();
 
      */
-
     //FÖR ATT REKOMENDERA KÖP. MATCHA KÖPTA SPEL OSV.
     @ManyToMany(mappedBy = "owned")
     List<User> buyers;
-
-    //lista ut hur allt ska göras sen
-    String imageURL;
 
 
     public Product(String name, int price, String productDescription, String imageURL, Category category) {
@@ -62,6 +59,22 @@ public abstract class Product implements ProductInterface {
     //För testning. Ska tas bort när applikationen är klar.
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public String getName() {

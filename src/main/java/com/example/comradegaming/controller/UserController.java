@@ -26,9 +26,9 @@ public class UserController {
     }
 
     @GetMapping("{name}")
-    public ResponseEntity<Optional<User>> findByName(@PathVariable String name) {
-        Optional<User> found = service.find(name);
-        if (found.isEmpty()) {
+    public ResponseEntity<User> findByName(@PathVariable String name) {
+        User found = service.find(name);
+        if (found==null) {
             throw new EntityNotFoundException("Could not find User with name " + name);
         } else {
             return new ResponseEntity<>(found, HttpStatus.OK);
@@ -44,8 +44,8 @@ public class UserController {
     @DeleteMapping("{name}")
     public String remove(@PathVariable String name) {
 
-        Optional<User> found = service.find(name);
-        if (found.isEmpty()) {
+        User found = service.find(name);
+        if (found==null) {
             throw new EntityNotFoundException("Could not find User with name " + name);
         } else {
             service.delete(name);

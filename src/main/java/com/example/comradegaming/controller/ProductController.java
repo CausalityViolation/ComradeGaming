@@ -1,6 +1,7 @@
 package com.example.comradegaming.controller;
 
 import com.example.comradegaming.entities.*;
+import com.example.comradegaming.enums.Category;
 import com.example.comradegaming.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,7 +53,7 @@ public class ProductController {
 
     @PostMapping("/add/digitalgame")
     public ResponseEntity<DigitalGame> add(@RequestBody DigitalGame game) {
-
+        game.setCategory(Category.DigitalGame);
         service.add(game);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -60,30 +61,33 @@ public class ProductController {
 
     @PostMapping("/add/clothing")
     public ResponseEntity<Clothing> add(@RequestBody Clothing cloth) {
+        cloth.setCategory(Category.Clothing);
         service.add(cloth);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/add/boardgame")
     public ResponseEntity<BoardGame> add(@RequestBody BoardGame board) {
+        board.setCategory(Category.Board);
         service.add(board);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/add/movie")
     public ResponseEntity<Movie> add(@RequestBody Movie movieFilm) {
+        movieFilm.setCategory(Category.Movie);
         service.add(movieFilm);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-
-
-/*
     @DeleteMapping("{id}")
     public ResponseEntity<Product> remove(@PathVariable Integer id) {
         checkIfNull(service.find(id));
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+/*
+
 
 
 

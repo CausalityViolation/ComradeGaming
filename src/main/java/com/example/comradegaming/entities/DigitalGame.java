@@ -11,22 +11,11 @@ import com.example.comradegaming.enums.Platform;
 import java.util.*;
 
 @Entity
-@Table
 public class DigitalGame extends Product {
 
     private Platform platform;
     private Company developer;
     private Company publisher;
-
-    public String getTest() {
-        return test;
-    }
-
-    public void setTest(String test) {
-        this.test = test;
-    }
-
-    private String test;
 
     public DigitalGame() {
     }

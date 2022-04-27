@@ -10,5 +10,7 @@ public enum Company {
     SQUARE_ENIX,
     BUNGIE_INC,
     SONY_INTERACTIVE_ENTERTAINMENT,
-    MOVIEFILM
+    MOVIEFILM,
+    Black_Isle,
+    Beamdog
 }

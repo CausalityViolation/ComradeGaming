@@ -1,5 +1,7 @@
 package com.example.comradegaming.service;
 
+import com.example.comradegaming.entities.Product;
+import com.example.comradegaming.repo.ProductRepo;
 import com.example.comradegaming.repo.UserRepo;
 import com.example.comradegaming.entities.User;
 import org.springframework.stereotype.Service;
@@ -11,19 +13,30 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepo repository;
+    private final ProductRepo productRepository;
 
-    public UserService(UserRepo userRepo) {
+    public UserService(UserRepo userRepo, ProductRepo productRepo) {
         this.repository = userRepo;
+        this.productRepository=productRepo;
     }
 
     public User add(User user) {
         return repository.save(user);
     }
 
-    public Optional<User> find(String name) {
-        var found = repository.findById(name);
-        if (found.isPresent()) {
+    public User find(String name) {
+        var all = repository.findAll();
+        User found=null;
+
+        for (User user: all) {
+            if(user.getUsername().equalsIgnoreCase(name)){
+                found=user;
+                break;
+            }
+        }
+        if (found!=null) {
             return found;
+            //Ska man verkligen kasta denna exception på flera ställen?!
         } else {
             throw new EntityNotFoundException("User with name " + name + "not found!");
         }
@@ -31,9 +44,10 @@ public class UserService {
 
     public void delete(String name) {
 
-        var found = repository.findById(name);
-        if (found.isPresent()) {
-            repository.deleteById(name);
+        var found = find(name);
+
+        if (found!=null) {
+            repository.deleteById(found.getId());
         } else {
             throw new EntityNotFoundException("User with name " + name + "not found!");
         }
@@ -41,5 +55,15 @@ public class UserService {
 
     public Iterable<User> findAll() {
         return repository.findAll();
+    }
+
+    public void buy(int productID, long userID){
+        Optional<Product> bought = productRepository.findById(productID);
+        //exceptionhandling behövs här
+        Product pro = bought.get();
+        Optional<User> user = repository.findById(userID);
+        User use = user.get();
+        use.buy(pro);
+        repository.save(use);
     }
 }

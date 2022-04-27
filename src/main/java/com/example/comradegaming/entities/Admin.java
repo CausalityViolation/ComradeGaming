@@ -3,7 +3,6 @@ package com.example.comradegaming.entities;
 import javax.persistence.*;
 
 @Entity
-@Table
 public class Admin {
 
     @Id
