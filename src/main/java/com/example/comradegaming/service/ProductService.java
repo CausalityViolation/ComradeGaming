@@ -9,7 +9,7 @@ import com.example.comradegaming.repo.UserRepo;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ProductService {
@@ -38,7 +38,7 @@ public class ProductService {
         }
     }
 
-    public void addUserToProduct(User user, Product product){
+    public void addUserToProduct(User user, Product product) {
         product.addUserToBuyerList(user);
         repository.save(product);
     }

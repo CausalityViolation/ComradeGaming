@@ -1,6 +1,7 @@
 package com.example.comradegaming.entities;
 
 import com.example.comradegaming.enums.Category;
+import com.example.comradegaming.enums.Used;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -19,6 +20,7 @@ public class Product implements ProductInterface {
     private int price;
     private String productDescription;
     private Category category;
+    private Used used;
     //lista ut hur allt ska göras sen
     String imageURL;
 
@@ -51,6 +53,14 @@ public class Product implements ProductInterface {
         return "こんな風にアップリ使用出来ません。他の商品選択して下さい。CHOSEN ITEM IS CLASS PRODUCT. YOU ARE USING THE APPLICATION IN AN INCORRECT WAY YOU FOOL.";
     }
 
+    public Used getUsed() {
+        return used;
+    }
+
+    public void setUsed(Used used) {
+        this.used = used;
+    }
+
     public void addUserToBuyerList(User user) {
         buyers.add(user);
     }
@@ -62,6 +72,10 @@ public class Product implements ProductInterface {
     //För testning. Ska tas bort när applikationen är klar.
     public void setId(long id) {
         this.id = id;
+    }
+
+    public User deliverSeller() {
+        return seller;
     }
 
     public Category getCategory() {

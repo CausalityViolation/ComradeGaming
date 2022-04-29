@@ -57,7 +57,7 @@ public class UserController {
     }
 
     @DeleteMapping("forsale/{userID}/sold/{productID}")
-    public ResponseEntity<User> forSaleSold(@PathVariable long userID, @PathVariable long productID){
+    public ResponseEntity<User> forSaleSold(@PathVariable long userID, @PathVariable long productID) {
         service.sellForSale(userID, productID);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -83,7 +83,7 @@ public class UserController {
     }
 
     @GetMapping("forsale/{userID}")
-    public Set<Product> deliverForSale(@PathVariable long userID){
+    public Set<Product> deliverForSale(@PathVariable long userID) {
         return service.deliverForSale(userID);
     }
 }

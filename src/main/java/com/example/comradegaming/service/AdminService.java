@@ -24,7 +24,7 @@ public class AdminService {
         this.productRepo = productRepo;
     }
 
-    public Set<User> getBuyers(long productID){
+    public Set<User> getBuyers(long productID) {
         Optional<Product> productOptional = productRepo.findById(productID);
         //exceptionhandling här
         Product foundProduct = productOptional.get();

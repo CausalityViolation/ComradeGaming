@@ -2,9 +2,11 @@ package com.example.comradegaming.service;
 
 import com.example.comradegaming.entities.Product;
 import com.example.comradegaming.enums.Used;
+import com.example.comradegaming.exceptionHandling.CustomException;
 import com.example.comradegaming.repo.ProductRepo;
 import com.example.comradegaming.repo.UserRepo;
 import com.example.comradegaming.entities.User;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -65,7 +67,10 @@ public class UserService {
         Optional<Product> bought = productRepository.findById(productID);
         Optional<User> user = repository.findById(userID);
 
-        //exceptionhandling behövs här
+        if(bought.isEmpty() || user.isEmpty()){
+            throw new EntityNotFoundException();
+        }
+
         Product foundProduct = bought.get();
         User foundUser = user.get();
         foundUser.purchaseProduct(foundProduct);
@@ -73,7 +78,7 @@ public class UserService {
         repository.save(foundUser);
     }
 
-    public void addForSale(Product product, long userID){
+    public void addForSale(Product product, long userID) {
         Optional<User> user = repository.findById(userID);
         product.setUsed(Used.YES);
         //exceptionhandling behövs här
@@ -84,7 +89,7 @@ public class UserService {
         repository.save(foundUser);
     }
 
-    public Set<Product> deliverForSale(long userID){
+    public Set<Product> deliverForSale(long userID) {
         Optional<User> userOptional = repository.findById(userID);
 
         //exceptionhandling
