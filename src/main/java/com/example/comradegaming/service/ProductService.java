@@ -2,6 +2,7 @@ package com.example.comradegaming.service;
 
 
 import com.example.comradegaming.entities.User;
+import com.example.comradegaming.enums.Used;
 import com.example.comradegaming.repo.ProductRepo;
 import com.example.comradegaming.entities.Product;
 import com.example.comradegaming.repo.UserRepo;
@@ -53,7 +54,13 @@ public class ProductService {
     }
 
     public Iterable<Product> findAll() {
-        return repository.findAll();
+        List<Product> filteredProducts = new ArrayList<>();
+        for (Product product : repository.findAll()) {
+            if (product.getUsed() != Used.YES) {
+                filteredProducts.add(product);
+            }
+        }
+        return filteredProducts;
     }
 
     public String getType(Product product) {

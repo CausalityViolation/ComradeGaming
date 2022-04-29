@@ -56,7 +56,6 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
     @PostMapping()
     public ResponseEntity<User> add(@RequestBody User user) {
 

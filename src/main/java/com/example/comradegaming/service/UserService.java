@@ -1,6 +1,7 @@
 package com.example.comradegaming.service;
 
 import com.example.comradegaming.entities.Product;
+import com.example.comradegaming.enums.Used;
 import com.example.comradegaming.repo.ProductRepo;
 import com.example.comradegaming.repo.UserRepo;
 import com.example.comradegaming.entities.User;
@@ -74,7 +75,7 @@ public class UserService {
 
     public void addForSale(Product product, long userID){
         Optional<User> user = repository.findById(userID);
-
+        product.setUsed(Used.YES);
         //exceptionhandling behövs här
         User foundUser = user.get();
         productService.add(product);
