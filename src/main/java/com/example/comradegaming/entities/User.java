@@ -75,4 +75,8 @@ public class User {
     public Set<Product> deliverForSale(){
         return forSale;
     }
+
+    public void sellItemForSale(Product foundProduct) {
+        forSale.removeIf(product -> product.getId() == foundProduct.getId());
+    }
 }

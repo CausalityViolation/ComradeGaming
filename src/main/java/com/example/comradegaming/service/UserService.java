@@ -91,4 +91,16 @@ public class UserService {
 
         return foundUser.deliverForSale();
     }
+
+    public void sellForSale(long userID, long productID) {
+        Optional<Product> bought = productRepository.findById(productID);
+        Optional<User> user = repository.findById(userID);
+
+        //exceptionhandling behövs här
+        Product foundProduct = bought.get();
+        User foundUser = user.get();
+
+        foundUser.sellItemForSale(foundProduct);
+        productRepository.delete(foundProduct);
+    }
 }

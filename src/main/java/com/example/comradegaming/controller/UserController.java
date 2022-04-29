@@ -44,13 +44,17 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PatchMapping("addtoforsale/{userID}")
+    @PatchMapping("forsale/{userID}/add")
     public ResponseEntity<User> sellProduct(@PathVariable Long userID, @RequestBody Product product) {
         service.addForSale(product, userID);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    //Lägg till en till endpoint för att SÄLJA item (ta bort från forSale-listan
+    @DeleteMapping("forsale/{userID}/sold/{productID}")
+    public ResponseEntity<User> forSaleSold(@PathVariable long userID, @PathVariable long productID){
+        service.sellForSale(userID, productID);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 
     @PostMapping()
