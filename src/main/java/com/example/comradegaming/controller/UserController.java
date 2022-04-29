@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityNotFoundException;
 import javax.ws.rs.Path;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("users")
@@ -43,9 +44,9 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PatchMapping("addtoforsale/{userID}/{productID}")
-    public ResponseEntity<User> sellProduct(@PathVariable Long userID, @PathVariable Long productID) {
-        service.addForSale(productID, userID);
+    @PatchMapping("addtoforsale/{userID}")
+    public ResponseEntity<User> sellProduct(@PathVariable Long userID, @RequestBody Product product) {
+        service.addForSale(product, userID);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -71,5 +72,10 @@ public class UserController {
             //Placeholder return message. Implement JSON?
             return "Successfully removed user with name " + name;
         }
+    }
+
+    @GetMapping("forsale/{userID}")
+    public Set<Product> deliverForSale(@PathVariable long userID){
+        return service.deliverForSale(userID);
     }
 }

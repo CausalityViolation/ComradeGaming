@@ -9,8 +9,8 @@ import java.util.Set;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
-public abstract class Product implements ProductInterface {
-    //Om allt kraschar sen kanske det är pga att denna klass är abstrakt. Låter det vara så länge
+public class Product implements ProductInterface {
+    //tog bort abstract för testning. Bör dock sättas som abstract igen...
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -122,11 +122,12 @@ public abstract class Product implements ProductInterface {
     
  */
 
-    public User getSeller() {
-        return seller;
-    }
+//    public User getSeller() {
+//        return seller;
+//    }
 
     public void setSeller(User seller) {
         this.seller = seller;
     }
+
 }

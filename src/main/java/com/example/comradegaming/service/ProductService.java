@@ -60,4 +60,8 @@ public class ProductService {
         return "You provided me with a " + product.getClass().toString();
     }
 
+    public void addSellerToProduct(User user, Product product) {
+        product.setSeller(user);
+        repository.save(product);
+    }
 }

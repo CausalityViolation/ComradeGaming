@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService {
@@ -71,15 +72,23 @@ public class UserService {
         repository.save(foundUser);
     }
 
-    public void addForSale(long productID, long userID){
-        Optional<Product> productOptional = productRepository.findById(productID);
+    public void addForSale(Product product, long userID){
         Optional<User> user = repository.findById(userID);
 
         //exceptionhandling behövs här
-        Product foundProduct = productOptional.get();
         User foundUser = user.get();
-
-        foundUser.addItemForSale(foundProduct);
+        productService.add(product);
+        productService.addSellerToProduct(foundUser, product);
+        foundUser.addItemForSale(product);
         repository.save(foundUser);
+    }
+
+    public Set<Product> deliverForSale(long userID){
+        Optional<User> userOptional = repository.findById(userID);
+
+        //exceptionhandling
+        User foundUser = userOptional.get();
+
+        return foundUser.deliverForSale();
     }
 }

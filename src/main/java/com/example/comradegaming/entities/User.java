@@ -11,6 +11,7 @@ public class User {
     @Id
     @GeneratedValue
     private long id;
+    //username borde vara unikt...
     private String username;
     private String password;
 
@@ -63,11 +64,15 @@ public class User {
         forSale.add(item);
     }
 
-    public Set<Product> getForSale() {
-        return forSale;
-    }
+//    public Set<Product> getForSale() {
+//        return forSale;
+//    }
 
     public long getId() {
         return id;
+    }
+
+    public Set<Product> deliverForSale(){
+        return forSale;
     }
 }
