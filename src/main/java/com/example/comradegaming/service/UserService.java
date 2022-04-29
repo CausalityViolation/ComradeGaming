@@ -104,4 +104,45 @@ public class UserService {
         foundUser.sellItemForSale(foundProduct);
         productRepository.delete(foundProduct);
     }
+
+    public HttpStatus updateProduct(long userID, long productID, Product updatedItem) {
+        Optional<Product> optionalProduct = productRepository.findById(productID);
+
+        //exceptionhandling
+
+        Product originalItem = optionalProduct.get();
+
+        if (originalItem.deliverSeller() == null) {
+            throw new CustomException("BÖGEN!!!!!!!!!!!!!!!!!1");
+        }
+
+        if (originalItem.deliverSeller().getId() == userID) {
+            if (updatedItem.getPrice() != 0) {
+                originalItem.setPrice(updatedItem.getPrice());
+            }
+
+            if (updatedItem.getName() != null) {
+                originalItem.setName(updatedItem.getName());
+            }
+
+            if (updatedItem.getProductDescription() != null) {
+                originalItem.setProductDescription(updatedItem.getProductDescription());
+            }
+
+            if (updatedItem.getCategory() != null) {
+                originalItem.setCategory(updatedItem.getCategory());
+            }
+
+            if (updatedItem.getImageURL() != null) {
+                originalItem.setImageURL(updatedItem.getImageURL());
+            }
+        } else {
+            return HttpStatus.NOT_ACCEPTABLE;
+        }
+        //else kasta en exception broder
+
+        updatedItem.setId(originalItem.getId());
+        productRepository.save(originalItem);
+        return HttpStatus.OK;
+    }
 }

@@ -50,6 +50,12 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PatchMapping("forsale/{userID}/update/{productID}")
+    public ResponseEntity<Product> updateUsedItem(@PathVariable long userID, @PathVariable long productID
+            , @RequestBody Product updatedItem) {
+        return new ResponseEntity<>(service.updateProduct(userID, productID, updatedItem));
+    }
+
     @DeleteMapping("forsale/{userID}/sold/{productID}")
     public ResponseEntity<User> forSaleSold(@PathVariable long userID, @PathVariable long productID){
         service.sellForSale(userID, productID);
@@ -58,7 +64,6 @@ public class UserController {
 
     @PostMapping()
     public ResponseEntity<User> add(@RequestBody User user) {
-
         User added = service.add(user);
         return new ResponseEntity<>(added, HttpStatus.CREATED);
     }
