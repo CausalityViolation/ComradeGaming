@@ -15,10 +15,11 @@ public class ErrorHandler {
 
     public ErrorHandler(HttpStatus status, String errorMessage) {
         this();
-        timeStamp = LocalDateTime.now();
+        this.timeStamp = LocalDateTime.now();
         this.status = status;
         this.errorMessage = errorMessage;
     }
+
 
     public HttpStatus getStatus() {
         return status;
