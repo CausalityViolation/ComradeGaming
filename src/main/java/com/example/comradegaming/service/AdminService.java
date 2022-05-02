@@ -59,34 +59,35 @@ public class AdminService {
         return repository.findAll();
     }
 
-    public Product updateProduct(long productID, Product updatedItem) {
-        Optional<Product> optionalProduct = productRepo.findById(productID);
-
-        //exceptionhandling
-        Product originalItem = optionalProduct.get();
-
-        if (updatedItem.getPrice() != 0) {
-            originalItem.setPrice(updatedItem.getPrice());
+    private Admin isAdminPresent(Optional<Admin> found, String adminName) {
+        if (found.isEmpty()) {
+            throw new CustomException("Admin with name " + adminName + " not present in database", HttpStatus.NOT_FOUND);
         }
-
-        if (updatedItem.getName() != null) {
-            originalItem.setName(updatedItem.getName());
-        }
-
-        if (updatedItem.getProductDescription() != null) {
-            originalItem.setProductDescription(updatedItem.getProductDescription());
-        }
-
-        if (updatedItem.getCategory() != null) {
-            originalItem.setCategory(updatedItem.getCategory());
-        }
-
-        if (updatedItem.getImageURL() != null) {
-            originalItem.setImageURL(updatedItem.getImageURL());
-        }
-        updatedItem.setId(originalItem.getId());
-        productRepo.save(originalItem);
-        return originalItem;
+        return found.get();
     }
 
+    private void doesAdminHaveData(Admin admin) {
+        if (admin.getAdminName() == null || admin.getAdminPassword() == null) {
+            throw new CustomException("Trying to create Admin with invalid data", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    public void isAdminNameUnique(Admin admin) {
+        Iterable<Admin> allAdmins = repository.findAll();
+
+        for (Admin adminInDatabase : allAdmins) {
+            if (adminInDatabase.getAdminName().equalsIgnoreCase(admin.getAdminName())) {
+                throw new CustomException("Admin with username " + admin.getAdminName() + " already exists in database", HttpStatus.NOT_ACCEPTABLE);
+            }
+        }
+    }
+
+    public void updatePassword(String adminName, String newPassword) {
+        Optional<Admin> optionalAdmin = repository.findById(adminName);
+        Admin adminToUpdate = isAdminPresent(optionalAdmin, adminName);
+
+        //Lägg till så den checkar ditt gamla passord innan du får byta
+        adminToUpdate.setAdminPassword(newPassword);
+        repository.save(adminToUpdate);
+    }
 }

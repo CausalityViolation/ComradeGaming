@@ -1,5 +1,6 @@
 package com.example.comradegaming.exceptionHandling;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
@@ -8,6 +9,9 @@ public class ErrorHandler {
 
     private HttpStatus status;
     private String errorMessage;
+    private String details;
+
+    @JsonFormat(pattern = "dd-MM-yyyy hh:mm:ss")
     private LocalDateTime timeStamp;
 
     public ErrorHandler() {
@@ -31,5 +35,9 @@ public class ErrorHandler {
 
     public LocalDateTime getTimeStamp() {
         return timeStamp;
+    }
+
+    public String getDetails() {
+        return details;
     }
 }

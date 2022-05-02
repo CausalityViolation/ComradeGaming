@@ -1,7 +1,6 @@
 package com.example.comradegaming.controller;
 
-import com.example.comradegaming.entities.Product;
-import com.example.comradegaming.entities.User;
+import com.example.comradegaming.entities.Admin;
 import com.example.comradegaming.service.AdminService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,17 +16,29 @@ public class AdminController {
         this.service = adminService;
     }
 
-    @GetMapping("{productID}")
-    public ResponseEntity<Iterable<User>> findAllBuyers(@PathVariable long productID) {
-        Iterable<User> foundBuyers = service.getBuyers(productID);
-        return new ResponseEntity<>(foundBuyers, HttpStatus.OK);
+    @GetMapping
+    public ResponseEntity<Iterable<Admin>> findAllAdmins() {
+        Iterable<Admin> foundAdmins = service.findAll();
+        return new ResponseEntity<>(foundAdmins, HttpStatus.OK);
     }
 
-    @PatchMapping("/update/{productID}")
-    public ResponseEntity<Product> updateProduct(@PathVariable long productID
-            , @RequestBody Product updatedItem) {
+    @GetMapping("{name}")
+    public ResponseEntity<Admin> getByName(@PathVariable String name) {
+        Admin foundAdmin = service.find(name);
+        return new ResponseEntity<>(foundAdmin, HttpStatus.OK);
+    }
 
-        return new ResponseEntity<>(service.updateProduct(productID, updatedItem), HttpStatus.OK);
+    @PatchMapping("update/{adminName}/{newPassword}")
+    public ResponseEntity<Admin> updateAdminPassword(@PathVariable String adminName, @PathVariable String newPassword) {
+        Admin foundAdmin = service.find(adminName);
+        service.updatePassword(adminName, newPassword);
+        return new ResponseEntity<>(foundAdmin, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Admin> createAdmin(@RequestBody Admin admin) {
+        service.add(admin);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

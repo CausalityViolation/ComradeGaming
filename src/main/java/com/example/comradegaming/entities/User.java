@@ -8,10 +8,11 @@ import java.util.Set;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 public class User {
+
     @Id
     @GeneratedValue
     private long id;
-    //username borde vara unikt...
+
     private String username;
     private String password;
 
@@ -72,7 +73,7 @@ public class User {
         return id;
     }
 
-    public Set<Product> deliverForSale(){
+    public Set<Product> deliverForSale() {
         return forSale;
     }
 

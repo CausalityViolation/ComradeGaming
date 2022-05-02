@@ -31,11 +31,7 @@ public class UserController {
     @GetMapping("{name}")
     public ResponseEntity<User> findByName(@PathVariable String name) {
         User found = service.find(name);
-        if (found == null) {
-            throw new EntityNotFoundException("Could not find User with name " + name);
-        } else {
-            return new ResponseEntity<>(found, HttpStatus.OK);
-        }
+        return new ResponseEntity<>(found, HttpStatus.OK);
     }
 
     @PatchMapping("buy/{userID}/{productID}")

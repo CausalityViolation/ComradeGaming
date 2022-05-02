@@ -48,8 +48,7 @@ public class ProductService {
         if (found.isPresent()) {
             repository.deleteById(id);
         } else {
-            //placeholder return message if fail
-            throw new EntityNotFoundException("Product with ID " + id + "not found!");
+            throw new CustomException("Product with ID " + id + " not found!", HttpStatus.NOT_FOUND);
         }
     }
 
@@ -68,7 +67,23 @@ public class ProductService {
     }
 
     public void addSellerToProduct(User user, Product product) {
+
+        checkIfUserIsPresentInDatabase(user);
+        checkIfProductIsPresentInDatabase(product);
+
         product.setSeller(user);
         repository.save(product);
+    }
+
+    private void checkIfProductIsPresentInDatabase(Product product) {
+        if (product == null) {
+            throw new CustomException("Product not present in database", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    private void checkIfUserIsPresentInDatabase(User user) {
+        if (user == null) {
+            throw new CustomException("User not present in database", HttpStatus.NOT_FOUND);
+        }
     }
 }
