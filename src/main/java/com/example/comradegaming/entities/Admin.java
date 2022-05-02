@@ -9,9 +9,6 @@ import javax.persistence.*;
 public class Admin {
 
     @Id
-    @GeneratedValue
-    private long id;
-    //username borde vara unikt...
     private String adminName;
     private String adminPassword;
 

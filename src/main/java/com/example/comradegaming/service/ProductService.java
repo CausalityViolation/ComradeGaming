@@ -3,23 +3,21 @@ package com.example.comradegaming.service;
 
 import com.example.comradegaming.entities.User;
 import com.example.comradegaming.enums.Used;
+import com.example.comradegaming.exceptionHandling.CustomException;
 import com.example.comradegaming.repo.ProductRepo;
 import com.example.comradegaming.entities.Product;
-import com.example.comradegaming.repo.UserRepo;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.*;
 
 @Service
 public class ProductService {
 
     private final ProductRepo repository;
-    private final UserRepo userRepo;
 
-    public ProductService(ProductRepo repo, UserRepo userRepo) {
+    public ProductService(ProductRepo repo) {
         this.repository = repo;
-        this.userRepo = userRepo;
     }
 
     public String add(Product product) {
@@ -33,12 +31,15 @@ public class ProductService {
         if (found.isPresent()) {
             return found;
         } else {
-            //placeholder return message if fail
-            throw new EntityNotFoundException("Product with ID " + id + "not found!");
+            throw new CustomException("Product with ID " + id + " not found!", HttpStatus.NOT_FOUND);
         }
     }
 
     public void addUserToProduct(User user, Product product) {
+
+        checkIfUserIsPresentInDatabase(user);
+        checkIfProductIsPresentInDatabase(product);
+
         product.addUserToBuyerList(user);
         repository.save(product);
     }
@@ -60,10 +61,6 @@ public class ProductService {
             }
         }
         return filteredProducts;
-    }
-
-    public String getType(Product product) {
-        return "You provided me with a " + product.getClass().toString();
     }
 
     public void addSellerToProduct(User user, Product product) {

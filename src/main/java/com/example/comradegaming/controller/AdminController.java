@@ -41,4 +41,11 @@ public class AdminController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @DeleteMapping("{name}")
+    public ResponseEntity<Admin> deleteAdmin(@PathVariable String name) {
+        service.delete(name);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
 }

@@ -34,6 +34,12 @@ public class UserController {
         return new ResponseEntity<>(found, HttpStatus.OK);
     }
 
+    @PatchMapping("{userID}/update/{password}")
+    public ResponseEntity<User>updatePassword(@PathVariable String password, @PathVariable long userID){
+        service.updatePassword(userID, password);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PatchMapping("buy/{userID}/{productID}")
     public ResponseEntity<User> purchase(@PathVariable Long userID, @PathVariable Long productID) {
         service.buyProduct(productID, userID);

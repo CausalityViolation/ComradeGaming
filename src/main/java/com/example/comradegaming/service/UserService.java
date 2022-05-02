@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 import java.util.Set;
 
+@SuppressWarnings("OptionalGetWithoutIsPresent")
 @Service
 public class UserService {
 
@@ -26,6 +27,8 @@ public class UserService {
     }
 
     public User add(User user) {
+        doesUserHaveData(user);
+        isUserNameUnique(user);
         return repository.save(user);
     }
 
@@ -59,6 +62,14 @@ public class UserService {
 
     public Iterable<User> findAll() {
         return repository.findAll();
+
+    }
+
+    public void updatePassword(long ID, String password) {
+        Optional<User> optionalUser = repository.findById(ID);
+        User user = isUserPresent(ID, optionalUser);
+        user.setPassword(password);
+        repository.save(user);
     }
 
     public void buyProduct(long productID, long userID) {
@@ -128,8 +139,9 @@ public class UserService {
         Product originalItem = optionalProduct.get();
 
         if (originalItem.deliverSeller() == null) {
-            throw new CustomException("BÖGEN!!!!!!!!!!!!!!!!!1");
+            throw new CustomException("Can't find what you're looking for!", HttpStatus.NOT_FOUND);
         }
+
 
         if (originalItem.deliverSeller().getId() == userID) {
             setData(updatedItem, originalItem);

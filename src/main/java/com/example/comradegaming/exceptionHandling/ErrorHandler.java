@@ -17,11 +17,12 @@ public class ErrorHandler {
     public ErrorHandler() {
     }
 
-    public ErrorHandler(HttpStatus status, String errorMessage) {
+    public ErrorHandler(HttpStatus status, String errorMessage, Exception e) {
         this();
         this.timeStamp = LocalDateTime.now();
         this.status = status;
         this.errorMessage = errorMessage;
+        this.details = e.getMessage();
     }
 
 
