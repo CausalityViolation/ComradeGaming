@@ -64,6 +64,14 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PatchMapping("admin/create/{id}")
+    public ResponseEntity<User> makeAdmin(@PathVariable long id){
+        service.makeAdmin(service.findById(id));
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
     //Ändrar denna POST-mapping till SIGNUP för Users
     @PostMapping("signup")
     public ResponseEntity<User> add(@RequestBody User user) {

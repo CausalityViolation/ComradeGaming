@@ -218,4 +218,14 @@ public class UserService {
         }
 
     }
+
+    public User findById(long id) {
+        Optional<User> optionalUser = repository.findById(id);
+        return isUserPresent(id, optionalUser);
+    }
+
+    public void makeAdmin(User user) {
+        user.makeAdmin();
+        repository.save(user);
+    }
 }

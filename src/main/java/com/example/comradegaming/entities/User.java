@@ -83,4 +83,12 @@ public class User {
     public void sellItemForSale(Product foundProduct) {
         forSale.removeIf(product -> product.getId() == foundProduct.getId());
     }
+
+    public String deliverRole() {
+        return role;
+    }
+
+    public void makeAdmin() {
+        this.role = "ROLE_ADMIN";
+    }
 }
