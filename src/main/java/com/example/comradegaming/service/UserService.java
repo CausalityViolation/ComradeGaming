@@ -7,6 +7,7 @@ import com.example.comradegaming.exceptionHandling.CustomException;
 import com.example.comradegaming.repo.ProductRepo;
 import com.example.comradegaming.repo.UserRepo;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -19,16 +20,19 @@ public class UserService {
     private final UserRepo repository;
     private final ProductRepo productRepository;
     private final ProductService productService;
+    private final BCryptPasswordEncoder pwEncoder;
 
-    public UserService(UserRepo userRepo, ProductRepo productRepo, ProductService productService) {
+    public UserService(UserRepo userRepo, ProductRepo productRepo, ProductService productService, BCryptPasswordEncoder pwEncoder) {
         this.repository = userRepo;
         this.productRepository = productRepo;
         this.productService = productService;
+        this.pwEncoder = pwEncoder;
     }
 
     public User add(User user) {
         doesUserHaveData(user);
         isUserNameUnique(user);
+        encryptPassword(user);
         return repository.save(user);
     }
 
@@ -65,10 +69,17 @@ public class UserService {
 
     }
 
+    //Uppdaterat med Bcrypt
+    private void encryptPassword(User user) {
+        user.setPassword(pwEncoder.encode(user.deliverPassword()));
+    }
+
+    //Uppdaterat med Bcrypt
     public void updatePassword(long ID, String password) {
         Optional<User> optionalUser = repository.findById(ID);
         User user = isUserPresent(ID, optionalUser);
         user.setPassword(password);
+        encryptPassword(user);
         repository.save(user);
     }
 
@@ -191,7 +202,7 @@ public class UserService {
     }
 
     private void doesUserHaveData(User user) {
-        if (user.getUsername() == null || user.getPassword() == null) {
+        if (user.getUsername() == null || user.deliverPassword() == null) {
             throw new CustomException("User has invalid or insufficient data", HttpStatus.NOT_ACCEPTABLE);
         }
     }

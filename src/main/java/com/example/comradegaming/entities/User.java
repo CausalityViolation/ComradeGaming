@@ -14,8 +14,10 @@ public class User {
     @GeneratedValue
     private long id;
 
+
     private String username;
     private String password;
+    private String role = "ROLE_USER";
 
     @JsonBackReference
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
@@ -50,7 +52,7 @@ public class User {
         this.username = username;
     }
 
-    public String getPassword() {
+    public String deliverPassword() {
         return password;
     }
 

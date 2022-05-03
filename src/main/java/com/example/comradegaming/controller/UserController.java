@@ -34,8 +34,8 @@ public class UserController {
         return new ResponseEntity<>(found, HttpStatus.OK);
     }
 
-    @PatchMapping("{userID}/update/{password}")
-    public ResponseEntity<User>updatePassword(@PathVariable String password, @PathVariable long userID){
+    @PatchMapping("update/{userID}/update/{password}")
+    public ResponseEntity<User> updatePassword(@PathVariable String password, @PathVariable long userID) {
         service.updatePassword(userID, password);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -64,13 +64,14 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping()
+    //Ändrar denna POST-mapping till SIGNUP för Users
+    @PostMapping("signup")
     public ResponseEntity<User> add(@RequestBody User user) {
-        User added = service.add(user);
-        return new ResponseEntity<>(added, HttpStatus.CREATED);
+        service.add(user);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @DeleteMapping("{name}")
+    @DeleteMapping("delete/{name}")
     public String remove(@PathVariable String name) {
 
         User found = service.find(name);

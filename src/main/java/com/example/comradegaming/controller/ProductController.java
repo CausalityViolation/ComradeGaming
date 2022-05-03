@@ -39,7 +39,6 @@ public class ProductController {
         }
     }
 
-    //Kanske fixa så BUYERS endast syns för admins
     @GetMapping
     public ResponseEntity<Iterable<Product>> findAll() {
         return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
@@ -87,7 +86,7 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("delete/{id}")
     public ResponseEntity<Product> remove(@PathVariable Long id) {
         Optional<Product> productOptional = service.find(id);
         checkIfNull(productOptional);
