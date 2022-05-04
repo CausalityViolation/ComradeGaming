@@ -21,11 +21,8 @@ public class Sender {
         var categoryInfo = purchased.getCategory();
         var priceInfo = purchased.getPrice();
 
-        System.out.println("Sending information..");
-
         Message message = new Message(LocalDateTime.now(), categoryInfo, priceInfo);
         jmsTemplate.convertAndSend(Config.MESSAGE_QUEUE, message);
 
-        System.out.println("Information sent!");
     }
 }

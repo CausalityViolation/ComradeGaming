@@ -8,8 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
-import javax.ws.rs.Path;
-import java.util.Optional;
 import java.util.Set;
 
 @RestController

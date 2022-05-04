@@ -12,6 +12,8 @@ public class Message {
     private Category category;
     private long price;
 
+    public Message() {
+    }
 
     public Message(LocalDateTime localDateTime, Category category, long price) {
         this.localDateTime = localDateTime;
@@ -38,8 +40,8 @@ public class Message {
     @Override
     public String toString() {
         return
-                "\nTime of purchase: " + localDateTime +
+                "Time of purchase: " + localDateTime +
                         "\nCategory: " + category +
-                        "\nPrice: " + price;
+                        "\nPrice: " + price + " Rubel";
     }
 }
