@@ -4,6 +4,7 @@ package com.example.comradegaming.service;
 import com.example.comradegaming.entities.User;
 import com.example.comradegaming.enums.Used;
 import com.example.comradegaming.exceptionHandling.CustomException;
+import com.example.comradegaming.jms.Sender;
 import com.example.comradegaming.repo.ProductRepo;
 import com.example.comradegaming.entities.Product;
 import org.springframework.http.HttpStatus;
@@ -15,9 +16,11 @@ import java.util.*;
 public class ProductService {
 
     private final ProductRepo repository;
+    private final Sender jms;
 
-    public ProductService(ProductRepo repo) {
+    public ProductService(ProductRepo repo, Sender jms) {
         this.repository = repo;
+        this.jms = jms;
     }
 
     public String add(Product product) {
@@ -39,9 +42,9 @@ public class ProductService {
 
         checkIfUserIsPresentInDatabase(user);
         checkIfProductIsPresentInDatabase(product);
-
         product.addUserToBuyerList(user);
         repository.save(product);
+        jms.sendInformation(product);
     }
 
     public void delete(long id) {
