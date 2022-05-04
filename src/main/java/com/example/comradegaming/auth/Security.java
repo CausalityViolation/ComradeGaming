@@ -48,7 +48,6 @@ public class Security extends WebSecurityConfigurerAdapter {
                 .httpBasic();
         //.formLogin();
 
-
     }
 
 }
