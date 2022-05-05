@@ -7,15 +7,21 @@ import com.example.comradegaming.exceptionHandling.CustomException;
 import com.example.comradegaming.repo.ProductRepo;
 import com.example.comradegaming.repo.UserRepo;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 
-@SuppressWarnings("OptionalGetWithoutIsPresent")
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UserRepo repository;
     private final ProductRepo productRepository;
@@ -27,6 +33,18 @@ public class UserService {
         this.productRepository = productRepo;
         this.productService = productService;
         this.pwEncoder = pwEncoder;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = repository.findByUsername(username);
+        if (user == null) {
+            throw new CustomException("User with name " + username + " could not be found in database!", HttpStatus.NOT_FOUND);
+        }
+
+        Collection<GrantedAuthority> authorities = new ArrayList<>(1);
+        authorities.add(new SimpleGrantedAuthority(user.deliverRole()));
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.deliverPassword(), authorities);
     }
 
     public User add(User user) {
@@ -228,4 +246,6 @@ public class UserService {
         user.makeAdmin();
         repository.save(user);
     }
+
+
 }
