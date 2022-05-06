@@ -2,6 +2,7 @@ package com.example.comradegaming.controller;
 
 import com.example.comradegaming.entities.*;
 import com.example.comradegaming.enums.Category;
+import com.example.comradegaming.exceptionHandling.CustomException;
 import com.example.comradegaming.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,9 +34,8 @@ public class ProductController {
     }
 
     private void checkIfNull(Optional<Product> thing) {
-        //funkar detta?
         if (thing.isEmpty()) {
-            throw new EntityNotFoundException("Entity not found");
+            throw new CustomException("Entity not found", HttpStatus.NOT_FOUND);
         }
     }
 

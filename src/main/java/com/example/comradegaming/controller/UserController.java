@@ -46,7 +46,7 @@ public class UserController {
         return new ResponseEntity<>(found, HttpStatus.OK);
     }
 
-    @PatchMapping("update/{userID}/update/{password}")
+    @PatchMapping("update/{userID}/{password}")
     public ResponseEntity<User> updatePassword(@PathVariable String password, @PathVariable long userID) {
         service.updatePassword(userID, password);
         return new ResponseEntity<>(HttpStatus.OK);
