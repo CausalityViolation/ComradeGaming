@@ -22,6 +22,13 @@ public class Movie extends Product {
         this.publisher = publisher;
     }
 
+    @Override
+    public String getInformation() {
+        String info = getName() + " is a movie published by " + publisher
+                + ". It costs " + getPrice() + " rubels.";
+        return info;
+    }
+
     public Company getPublisher() {
         return publisher;
     }

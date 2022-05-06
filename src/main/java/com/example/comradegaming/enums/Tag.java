@@ -3,22 +3,22 @@ package com.example.comradegaming.enums;
 public enum Tag {
 
     //ratings
-    FOR_EVERYONE,
-    MATURE,
-    TEEN,
+    ForEveryone,
+    Mature,
+    Teen,
 
-    RACING,
+    Racing,
     FPS,
     RTS,
     RPG,
     CRPG,
     JRPG,
     ARPG,
-    SCI_FI,
-    FANTASY,
-    GRAND_STRATEGY_GAME,
+    SciFi,
+    Fantasy,
+    GrandStrategyGame,
 
     //Board game categories
-    EUROTRASH,
-    AMERITRASH,
+    Eurotrash,
+    Ameritrash,
 }
