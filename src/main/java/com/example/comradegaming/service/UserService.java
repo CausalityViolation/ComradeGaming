@@ -122,7 +122,7 @@ public class UserService implements UserDetailsService {
 
     public void addForSale(Product product, long userID) {
         Optional<User> user = repository.findById(userID);
-        product.setUsed(Used.YES);
+        product.setUsed(Used.Yes);
 
         if (user.isEmpty()) {
             throw new CustomException("User with ID " + userID + " could not be found in database!", HttpStatus.NOT_FOUND);

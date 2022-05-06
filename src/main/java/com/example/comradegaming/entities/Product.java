@@ -50,7 +50,7 @@ public class Product implements ProductInterface {
 
     @Override
     public String getInformation() {
-        return "こんな風にアップリ使用出来ません。他の商品選択して下さい。CHOSEN ITEM IS CLASS PRODUCT. YOU ARE USING THE APPLICATION IN AN INCORRECT WAY YOU FOOL.";
+        return "Product information has not yet been entered.";
     }
 
     public Used getUsed() {

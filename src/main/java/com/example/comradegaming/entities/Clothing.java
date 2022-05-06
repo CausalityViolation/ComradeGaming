@@ -25,6 +25,13 @@ public class Clothing extends Product {
         this.garment = garment;
     }
 
+    @Override
+    public String getInformation() {
+
+        return getName() + " is a " + garment + " made by " + brand
+                + ". It costs " + getPrice() + " rubels.";
+    }
+
     public Company getBrand() {
         return brand;
     }

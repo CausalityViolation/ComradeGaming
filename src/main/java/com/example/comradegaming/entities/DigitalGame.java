@@ -39,12 +39,9 @@ public class DigitalGame extends Product {
 
     @Override
     public String getInformation() {
-        String info = getName() + " is game developed by " + developer + " and published by " + publisher
+
+        return getName() + " is a game developed by " + developer + " and published by " + publisher
                 + ". It is playable on " + platform + ". It costs " + getPrice() + " rubels.";
-//        if (!getSeller().equals(null)) {
-//            info = info + " It is sold by " + getSeller().getUsername() + ".";
-//        }
-        return info;
     }
 
     public Platform getPlatform() {

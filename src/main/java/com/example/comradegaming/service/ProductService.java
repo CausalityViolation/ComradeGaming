@@ -59,7 +59,7 @@ public class ProductService {
     public Iterable<Product> findAll() {
         List<Product> filteredProducts = new ArrayList<>();
         for (Product product : repository.findAll()) {
-            if (product.getUsed() != Used.YES) {
+            if (product.getUsed() != Used.Yes) {
                 filteredProducts.add(product);
             }
         }

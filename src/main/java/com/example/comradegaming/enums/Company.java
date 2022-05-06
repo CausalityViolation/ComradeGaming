@@ -2,15 +2,15 @@ package com.example.comradegaming.enums;
 
 public enum Company {
     Microsoft,
-    FROM_SOFTWARE,
-    BLIZZARD,
-    NINTENDO,
-    UBISOFT,
+    FromSoftware,
+    Blizzard,
+    Nintendo,
+    Ubisoft,
     EpicGames,
-    SQUARE_ENIX,
-    BUNGIE_INC,
-    SONY_INTERACTIVE_ENTERTAINMENT,
-    MOVIEFILM,
-    Black_Isle,
+    SquareEnix,
+    BungieInc,
+    SonyInteractiveEntertainment,
+    MovieFilmAB,
+    BlackIsle,
     Beamdog
 }

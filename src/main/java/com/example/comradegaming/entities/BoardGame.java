@@ -20,6 +20,13 @@ public class BoardGame extends Product {
         this.publisher = publisher;
     }
 
+    @Override
+    public String getInformation() {
+
+        return getName() + " is board game made by and published by " + publisher
+                + " It costs " + getPrice() + " rubels.";
+    }
+
     public Company getPublisher() {
         return publisher;
     }
