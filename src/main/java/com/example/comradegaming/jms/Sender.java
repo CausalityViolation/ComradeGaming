@@ -1,7 +1,6 @@
 package com.example.comradegaming.jms;
 
 import com.example.comradegaming.entities.Product;
-import com.example.comradegaming.enums.Category;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +22,5 @@ public class Sender {
 
         Message message = new Message(LocalDateTime.now(), categoryInfo, priceInfo);
         jmsTemplate.convertAndSend(Config.MESSAGE_QUEUE, message);
-
     }
 }
