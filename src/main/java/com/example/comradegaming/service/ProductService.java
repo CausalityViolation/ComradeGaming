@@ -8,6 +8,7 @@ import com.example.comradegaming.jms.Sender;
 import com.example.comradegaming.repo.ProductRepo;
 import com.example.comradegaming.entities.Product;
 import org.springframework.http.HttpStatus;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.*;

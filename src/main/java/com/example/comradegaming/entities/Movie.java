@@ -17,8 +17,8 @@ public class Movie extends Product {
     public Movie() {
     }
 
-    public Movie(String name, int price, String productDescription, Company publisher, String imageUrl, Category category) {
-        super(name, price, productDescription, imageUrl, category);
+    public Movie(String name, int price, String productDescription, Company publisher, String imageUrl) {
+        super(name, price, productDescription, imageUrl, Category.Movie);
         this.publisher = publisher;
     }
 
