@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+
+  comradeDatabase:
+    image: mysql:8
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=comrade-source
+      - MYSQL_USER=comrade
+      - MYSQL_PASSWORD=123
+    ports:
+      - "3306:3306"
+    container_name: integrated-comrade-sql
+
+  activemq:
+    image: rmohr/activemq
+    container_name: integrated-comrade-activemq
+    environment:
+      - "TZ=Europe/Amsterdam"
+    ports:
+      - "61616:61616" # broker (admin:adminactivemq)(amq:amq)
+      - "8161:8161"   # web    http://boot2docker:8161/admin (admin:admin)
+
+  main-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: comrade
+    container_name: comradegamingmain
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://comradeDatabase:3306/comrade-source
+    ports:
+      - "8080:8080"
+    depends_on:
+      - comradeDatabase
+      - activemq
+
+    restart: "no"
+
