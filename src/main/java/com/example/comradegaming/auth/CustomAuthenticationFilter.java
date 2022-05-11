@@ -58,10 +58,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                 .withIssuer(request.getRequestURL().toString())
                 .sign(algorithm);
 
-        //Sparar tokens i headern
-        //response.setHeader("access_token", accessToken);
-        //response.setHeader("refresh_token", refreshToken);
-
         //Skickar med token som ett JSON-objekt istället
         Map<String, String> tokens = new HashMap<>();
         tokens.put("access_token", accessToken);

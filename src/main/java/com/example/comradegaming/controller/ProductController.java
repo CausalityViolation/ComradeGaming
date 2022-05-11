@@ -92,23 +92,4 @@ public class ProductController {
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
-
-
-
-
-
-
-
-
-/*
-
-    //NÅNSLAGSTEMPLATEIDE
-    private void checkIfNull(Optional<Product> thing) {
-        if (!thing.isPresent()) {
-            throw new EntityNotFoundException("Entity not found");
-        }
-    }
-     */
 }

@@ -40,15 +40,17 @@ class ProductServiceTest {
 
 
     @Test
-    void find() {
-
+    void doesServiceReturnCorrectProductWithValues() {
+        //given
         Product testProduct = new Product("testProduct", 666, "testDescription", "testImage", Category.DigitalGame);
 
+        //when
         Product savedTestProduct = testRepository.save(testProduct);
         long returnedId = savedTestProduct.getId();
         Optional<Product> foundTestProductOptional = testService.find(returnedId);
         Product foundTestProduct = foundTestProductOptional.get();
 
+        //then
         assertThat(testProduct.getName()).isEqualTo(foundTestProduct.getName());
         assertThat(testProduct.getProductDescription()).isEqualTo(foundTestProduct.getProductDescription());
         assertThat(testProduct.getPrice()).isEqualTo(foundTestProduct.getPrice());
@@ -56,7 +58,7 @@ class ProductServiceTest {
     }
 
     @Test
-    void add() {
+    void doesServiceReturnCorrectProduct() {
 
         //given
         Product testProduct = new Product(
