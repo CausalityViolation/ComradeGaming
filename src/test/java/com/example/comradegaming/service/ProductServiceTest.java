@@ -69,14 +69,4 @@ class ProductServiceTest {
         //then
         assertThat(testProduct).isEqualTo(testService.find(testProductID).get());
     }
-
-    @Test
-    @Disabled
-    void delete() {
-    }
-
-    @Test
-    @Disabled
-    void findAll() {
-    }
 }

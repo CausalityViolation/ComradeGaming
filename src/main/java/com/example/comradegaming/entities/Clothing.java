@@ -19,8 +19,8 @@ public class Clothing extends Product {
     public Clothing() {
     }
 
-    public Clothing(String name, int price, String productDescription, Company brand, Garment garment, String imageUrl, Category category) {
-        super(name, price, productDescription, imageUrl, category);
+    public Clothing(String name, int price, String productDescription, Company brand, Garment garment, String imageUrl) {
+        super(name, price, productDescription, imageUrl, Category.Clothing);
         this.brand = brand;
         this.garment = garment;
     }

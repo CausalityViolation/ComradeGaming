@@ -21,8 +21,8 @@ public class DigitalGame extends Product {
     }
 
     public DigitalGame(Platform platform, Company developer, Company publisher
-            , String name, int price, String productDescription, String imageUrl, Category category) {
-        super(name, price, productDescription, imageUrl, category);
+            , String name, int price, String productDescription, String imageUrl) {
+        super(name, price, productDescription, imageUrl, Category.DigitalGame);
         this.platform = platform;
         this.developer = developer;
         this.publisher = publisher;

@@ -12,5 +12,6 @@ public enum Company {
     SonyInteractiveEntertainment,
     MovieFilmAB,
     BlackIsle,
-    Beamdog
+    Beamdog,
+    ClothingForPeopleInc
 }
