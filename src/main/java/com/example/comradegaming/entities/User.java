@@ -1,6 +1,7 @@
 package com.example.comradegaming.entities;
 
 import com.fasterxml.jackson.annotation.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -26,7 +27,6 @@ public class User {
     @OneToMany(mappedBy = "seller")
     private Set<Product> forSale;
 
-    //Rekomenderade produkter. Vilka produkter har flest matchange tags med användaren???
 
     public User() {
     }
@@ -68,9 +68,6 @@ public class User {
         forSale.add(item);
     }
 
-//    public Set<Product> getForSale() {
-//        return forSale;
-//    }
 
     public long getId() {
         return id;

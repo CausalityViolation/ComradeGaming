@@ -6,6 +6,7 @@ import com.example.comradegaming.enums.Used;
 import com.example.comradegaming.exceptionHandling.CustomException;
 import com.example.comradegaming.repo.ProductRepo;
 import com.example.comradegaming.repo.UserRepo;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

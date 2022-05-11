@@ -83,8 +83,6 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
-    //Ändrar denna POST-mapping till SIGNUP för Users
     @PostMapping("signup")
     public ResponseEntity<User> add(@RequestBody User user) {
         service.add(user);
@@ -100,7 +98,6 @@ public class UserController {
         } else {
             service.delete(name);
 
-            //Placeholder return message. Implement JSON?
             return "Successfully removed user with name " + name;
         }
     }
