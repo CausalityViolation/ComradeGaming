@@ -4,9 +4,9 @@ Probably the most adequate retailer/CRUD-application in the world
 
 # HOW TO SETUP:
 
- 1. Docker Compose
+ 1. run docker-compose up in the application directory via your favorite cmd
 
- 2. Docker Compose igen (För att main-applikationen startar innan SQL-servern och krashar, så den behöver startas om manuellt igen)
+ 2. run docker-compose up again to restart the main application (it shuts down due to the SQL server taking longer to boot and the main application)
 
  3. SUCCESS!
 
@@ -15,77 +15,78 @@ Probably the most adequate retailer/CRUD-application in the world
 
 AUTH:
 
-Alla requests utom de som står under "ALLA" kräver en giltig JWT-token. Dessa ska skickas som header med prefixet "Bearer ". 
-JWT-tokens är giltiga i 10 minuter från skapandet.
+All requests except those found under "ALL" will require a valid JWT-token. The tokens should be sent with the prefix "Bearer " in postman, or by choosing the Bearer option in Insomnia. Tokens are valid for 10 minutes, and will require manual refresh upon expiration.
 
 
 ===========================================
 ```
 @Get
 
-/login (form med username + password) 
-	logga in
+/login (form with username + password) 
+	log in
 
 /products/information/{id}
-	få info om en produkt
+	product information
 
 /products
-	returnerar alla produkter
+	displays all available products
 
 /products/{id}
-	returnerar specifierad produkt
+	displays a specific product
 
 /stats
-	returnerar köpstatistik
+	displays buyer statistics
 
 /users
-	returnerar alla users
+	displays all users
 
-/users/{namn}
-	returnerar en user med det specifierade namnet
+/users/{name}
+	displays a specified user
 
 /users/forsale/{userID}
-	retunerar alla produkter som relevant användare säljer
+	displays all products for sale by specified user
 
 /users/refresh
-	refreshar din utgångna token
-	REFRESH TOKEN SOM BEARER TOKEN
+	refreshes expired JWT-token
+	REFRESH TOKEN AS BEARER TOKEN
 ```
 -----------------------------------------------------
 ```
 @Patch
 
 /users/update/{userID}/{password}
-	updaterar den specifierade användarens lösenord
+	updates specified user's password
 
 /users/buy/{userID}/{productID}
-	användaren köper den relevanta produkten
+	specified user{userID} purchases a product {productID} 
 
 /users/forsale/{userID}/add
-	lägger till en begagnad produkt som användaren vill sälja till användaren
-	JSON-BODY MED PRODUKTEN
+	adds a previously used product to a specified user's "for sale" list
+	
+	JSON-BODY with the product information
 {
 	"name": "Hoodie of Nerdness",
 	"price": "420",
-	"productDescription": "If you wear this. No intercourse you will have",
+	"productDescription": "If you wear this, things happen.",
 	"imageURL": "www.bilder.com/hoodiepic.png",
 	"garment": "Hoodie"
 }
 
 
 /users/forsale/{userID}/update/{productID}
-	uppdaterar en produkt som den relevanta användaren har till salu
-	JSON-BODY MED PRODUKTEN
+	updates a product in the specified user's "for sale" list
+	
+	JSON-BODY with the product information
 {
 	"name": "Hoodie of Nerdness",
 	"price": "420",
-	"productDescription": "If you wear this. No intercourse you will have",
+	"productDescription": "Don't wear this.",
 	"imageURL": "www.bilder.com/hoodiepic.png",
 	"garment": "Hoodie"
 }
 
 /users/admin/create/{id}
-	uppgraderar en användare till admin
+	promotes a user to admin status
 ```
 --------------------------------------------------------
 ```
@@ -93,11 +94,12 @@ JWT-tokens är giltiga i 10 minuter från skapandet.
 
 
 /products/add/digitalgame
-	lägger till ett datta-spejl i databasen
-	JSON-BODY
+	Add a digital game to the database
+	
+	JSON-BODY with the product information
 {
 	"name": "Baldurs Gate Enhanced Edition",
-	"productDescription": "Better than Final Fantasy",
+	"productDescription": "Not better than Final Fantasy",
 	"developer": "Black_Isle",
 	"publisher": "Beamdog",
 	"platform": "PC"
@@ -106,12 +108,13 @@ JWT-tokens är giltiga i 10 minuter från skapandet.
 
 
 /products/add/clothing
-	lägger till ett klädesplagg i databasen
-	JSON-BODY
+	Add a garment to the database
+	
+	JSON-BODY with the product information
 {
 	"name": "Hoodie of Nerdness",
 	"price": "420",
-	"productDescription": "If you wear this. No intercourse you will have",
+	"productDescription": "Fun description",
 	"imageURL": "www.bilder.com/hoodiepic.png",
 	"garment": "Hoodie"
 }
@@ -119,31 +122,34 @@ JWT-tokens är giltiga i 10 minuter från skapandet.
 
 
 /products/add/boardgame
-	lägger till ett brädspel i databsen
-	JSON-BODY
+	Add a board game to the database
+	
+	JSON-BODY with the product information
 {
 	"name": "Call of Cthulhu: Mansions of Madness",
 	"price": 666,
-	"productDescription": "",
-	"imageURL": "www.bilder.com/cocmom.jpg"
+	"productDescription": "Product description goes here!",
+	"imageURL": "www.bilder.com/picture.jpg"
 }
 
 /products/add/movie
-	lägger till en film i databsen
-	JSON-BODY
+	Add a movie to the database
+	
+	JSON-BODY with the product information
 {
 	"name": "The Cement",
-	"productDescription": "Watch concrete dry!!!",
+	"productDescription": "Watch concrete dry. Now in 8k.",
 	"publisher": "MovieFilmAB",
 	"price": "129"
 }
 
 /users/signup
-	registrera en ny användare. Default roll är "USER".
-	JSON-BODY
+	Register a new user. Default role is "USER"
+	
+	JSON-BODY with user information. Password will be encrypted upon submitting the form.
 { 
-	"username": "David",
-	"password": "Dromedar"
+	"username": "Dolen",
+	"password": "Dekk"
 }
 
 ```
@@ -152,38 +158,38 @@ JWT-tokens är giltiga i 10 minuter från skapandet.
 @Delete
 
 /users/forsale/{userID}/sold/{productID}
-	Användaren "säljer" en av sina produkter som hen har till salu
+	Deletes a product from the specified user's "for sale" list. Used when a user sells a product.
 
 
 /users/delete/{namn}
-	raderar den specifierade användaren
+	Deletes a specified user
 
 
 /products/delete/{id}
-	raderar den specifierade produkten
+	Deletes a specified product
 
 ```
 ===================================================================
 ```
-Authorization/Roller
+Authorization/Roles
 
 @Get
-	ALLA:
+	ALL:
 		/users/refresh
-	USER och ADMIN:
+	USER and ADMIN:
 		/products/information/..., /products, /products/{variabel}, /users/forsale/..., /users/forsale/...
 	ADMIN:
 		/products/..., /users/...
 	
 
 @Post
-	ALLA:
+	ALL:
 		/login, /users/signup
 	ADMIN:
 		/products/...
 
 @Patch
-	ADMIN och USER:
+	ADMIN and USER:
 		/users/buy/..., /users/forsale/...
 	ADMIN:
 		/products/..., /users/update/..., /users/admin/...
