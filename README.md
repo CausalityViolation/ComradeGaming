@@ -6,7 +6,7 @@ Probably the most adequate retailer/CRUD-application in the world
 
  1. run docker-compose up in the application directory via your favorite cmd
 
- 2. run docker-compose up again to restart the main application (it shuts down due to the SQL server taking longer to boot and the main application)
+ 2. run docker-compose up again to restart the main application (it shuts down due to the SQL server taking longer to boot than the main application)
 
  3. SUCCESS!
 
