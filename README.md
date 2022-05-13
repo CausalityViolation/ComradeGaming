@@ -20,10 +20,14 @@ All requests except those found under "ALL" will require a valid JWT-token. The 
 
 ===========================================
 ```
-@Get
+@Post
 
 /login (form with username + password) 
 	log in
+	
+```
+```
+@Get
 
 /products/information/{id}
 	product information
